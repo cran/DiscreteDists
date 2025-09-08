@@ -3,18 +3,20 @@
 #' @author Olga Usuga, \email{olga.usuga@udea.edu.co}
 #'
 #' @description
-#' The function \code{DMOLBE()} defines the Discrete Marshall-Olkin Length Biased
-#' Exponential distribution, a two parameter
-#' distribution, for a \code{gamlss.family} object to be used in GAMLSS fitting
-#' using the function \code{gamlss()}.
+#' The function \code{DMOLBE()} defines the
+#' Discrete Marshall-Olkin Length Biased Exponential distribution
+#' a two parameter distribution,
+#' for a \code{gamlss.family} object to be used in GAMLSS
+#' fitting using the function \code{gamlss()}.
 #'
 #' @param mu.link defines the mu.link, with "log" link as the default for the mu parameter.
 #' @param sigma.link defines the sigma.link, with "log" link as the default for the sigma.
 #'
 #' @references
-#' \insertRef{Aljohani2023}{DiscreteDists}
-#'
-#' @importFrom Rdpack reprompt
+#' Aljohani, H. M., Ahsan-ul-Haq, M., Zafar, J., Almetwally, E. M.,
+#' Alghamdi, A. S., Hussam, E., & Muse, A. H. (2023). Analysis of
+#' Covid-19 data using discrete Marshall–Olkinin length biased exponential:
+#' Bayesian and frequentist approach. Scientific Reports, 13(1), 12243.
 #'
 #' @seealso \link{dDMOLBE}.
 #'
@@ -118,8 +120,11 @@ DMOLBE <- function (mu.link="log", sigma.link="log") {
                  rqres      = expression(rqres(pfun="pDMOLBE", type="Discrete",
                                                ymin = 0, y = y, mu = mu, sigma = sigma)),
 
-                 mu.initial    = expression(mu    <- rep(estim_mu_sigma_DMOLBE(y)[1], length(y)) ),
-                 sigma.initial = expression(sigma <- rep(estim_mu_sigma_DMOLBE(y)[2], length(y)) ),
+                 # mu.initial    = expression(mu    <- rep(estim_mu_sigma_DMOLBE(y)[1], length(y)) ),
+                 # sigma.initial = expression(sigma <- rep(estim_mu_sigma_DMOLBE(y)[2], length(y)) ),
+
+                 mu.initial    = expression(mu    <- rep(1, length(y)) ),
+                 sigma.initial = expression(sigma <- rep(1, length(y)) ),
 
                  mu.valid    = function(mu)    all(mu > 0),
                  sigma.valid = function(sigma) all(sigma > 0),
@@ -133,6 +138,7 @@ DMOLBE <- function (mu.link="log", sigma.link="log") {
                    the_mean <- sigma * sum(num/den)
                    return(the_mean)
                  },
+
                  variance = function(mu, sigma, x_max=100) {
                    x <- 1:x_max
                    num <- (1+x/mu) * exp(-x/mu)
@@ -144,4 +150,35 @@ DMOLBE <- function (mu.link="log", sigma.link="log") {
 
   ),
   class=c("gamlss.family", "family"))
+}
+#' logLik function for DMOLBE
+#' @description Calculates logLik for DMOLBE distribution.
+#' @param logparam vector with parameters in log scale.
+#' @param x vector with the response variable.
+#' @return returns the loglikelihood given the parameters and random sample.
+#' @keywords internal
+#' @export
+logLik_DMOLBE <- function(logparam=c(0, 0), x){
+  return(sum(dDMOLBE(x     = x,
+                     mu    = exp(logparam[1]),
+                     sigma = exp(logparam[2]),
+                     log=TRUE)))
+}
+#' Initial values for DMOLBE
+#' @description This function generates initial values for the parameters.
+#' @param y vector with the response variable.
+#' @return returns a vector with the MLE estimations.
+#' @keywords internal
+#' @export
+#' @importFrom stats optim
+estim_mu_sigma_DMOLBE <- function(y) {
+  mod <- optim(par=c(0, 0),
+               fn=logLik_DMOLBE,
+               method="Nelder-Mead",
+               control=list(fnscale=-1, maxit=100000),
+               x=y)
+  res <- c(mu_hat    = exp(mod$par[1]),
+           sigma_hat = exp(mod$par[2]))
+  names(res) <- c("mu_hat", "sigma_hat")
+  return(res)
 }

@@ -101,14 +101,13 @@ probs2 <- prop.table(table(x))
 
 cn <- union(names(probs1), names(probs2))
 height <- rbind(probs1[cn], probs2[cn])
-nombres <- cn
-mp <- barplot(height, beside = TRUE, names.arg = nombres,
-              col=c('dodgerblue3','firebrick3'), las=1,
-              xlab='X', ylab='Proportion')
-legend('topright',
-       legend=c('Theoretical', 'Simulated'),
-       bty='n', lwd=3,
-       col=c('dodgerblue3','firebrick3'), lty=1)
+mp <- barplot(height, beside = TRUE, names.arg = cn,
+              col=c("dodgerblue3","firebrick3"), las=1,
+              xlab="X", ylab="Proportion")
+legend("topright",
+       legend=c("Theoretical", "Simulated"),
+       bty="n", lwd=3,
+       col=c("dodgerblue3","firebrick3"), lty=1)
 
 # Example 4
 # Checking the quantile function
@@ -122,7 +121,11 @@ plot(p, qxx, type="s", lwd=2, col="green3", ylab="quantiles",
 
 }
 \references{
-\insertRef{Aljohani2023}{DiscreteDists}
+Aljohani, H. M., Ahsan-ul-Haq, M., Zafar, J., Almetwally,
+E. M., Alghamdi, A. S., Hussam, E., & Muse, A. H. (2023).
+Analysis of Covid-19 data using discrete Marshall–Olkinin
+length biased exponential: Bayesian and frequentist approach.
+Scientific Reports, 13(1), 12243.
 }
 \seealso{
 \link{DMOLBE}.

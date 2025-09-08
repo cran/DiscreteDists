@@ -15,9 +15,11 @@ to fit a Discrete Poisson XLindley distribution
 in the \code{gamlss()} function.
 }
 \description{
-The function \code{POISXL()} defines  the Discrete Poisson XLindley distribution, one-parameter
-discrete distribution, for a \code{gamlss.family} object to be used in GAMLSS fitting
-using the function \code{gamlss()}.
+The function \code{POISXL()} defines the
+Discrete Poisson XLindley distribution
+a single parameter distribution,
+for a \code{gamlss.family} object to be used in GAMLSS
+fitting using the function \code{gamlss()}.
 }
 \details{
 The Discrete Poisson XLindley distribution with parameters \eqn{\mu} has a support
@@ -41,7 +43,7 @@ mod1 <- gamlss(y~1, family=POISXL,
 
 # Extracting the fitted values for mu
 # using the inverse link function
-exp(coef(mod1, what='mu'))
+exp(coef(mod1, what="mu"))
 
 # Example 2
 # Generating random values under some model
@@ -62,9 +64,37 @@ mod2 <- gamlss(y~x1, family=POISXL, data=dat,
                control=gamlss.control(n.cyc=500, trace=FALSE))
 
 summary(mod2)
+
+# Example 3
+# The counts the number of borers per hill of corn in an
+# experiment conducted randomly on 8 hills in 15 replications.
+# Taken from Ahsan-ul-Haq et al (2022) page 10.
+
+y <- rep(x=0:8, times=c(43, 35, 17, 11, 5, 4, 1, 2, 2))
+
+mod3 <- gamlss(y~1, family=POISXL,
+               control=gamlss.control(n.cyc=500, trace=FALSE))
+
+# Extracting the fitted values for mu
+exp(coef(mod3, what="mu"))
+
+# Example 4
+# The number of mammalian cytogenetic dosimetry lesions produced
+# by streptogramin exposure in rabbit.
+# Taken from Ahsan-ul-Haq et al (2022) page 10.
+
+y <- rep(x=0:4, times=c(200, 57, 30, 7, 6))
+
+mod4 <- gamlss(y~1, family=POISXL,
+               control=gamlss.control(n.cyc=500, trace=FALSE))
+
+# Extracting the fitted values for mu
+exp(coef(mod4, what="mu"))
+
+
 }
 \references{
-\insertRef{ahsan2022}{DiscreteDists}
+Ahsan-ul-Haq, M., Al-Bossly, A., El-Morshedy, M., & Eliwa, M. S. (2022). Poisson XLindley distribution for count data: statistical and reliability properties with estimation techniques and inference. Computational Intelligence and neuroscience, 2022(1), 6503670.
 }
 \seealso{
 \link{dPOISXL}.

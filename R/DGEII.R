@@ -3,18 +3,17 @@
 #' @author Valentina Hurtado Sepúlveda, \email{vhurtados@unal.edu.co}
 #'
 #' @description
-#' The function \code{DGEII()} defines the Discrete generalized exponential distribution,
-#' Second type, a two parameter
-#' distribution, for a \code{gamlss.family} object to be used in GAMLSS fitting
-#' using the function \code{gamlss()}.
+#' The function \code{DGEII()} defines the
+#' Discrete generalized exponential distribution of a Second type
+#' a two parameter distribution,
+#' for a \code{gamlss.family} object to be used in GAMLSS
+#' fitting using the function \code{gamlss()}.
 #'
 #' @param mu.link defines the mu.link, with "logit" link as the default for the mu parameter. Other links are "probit" and "cloglog"'(complementary log-log).
 #' @param sigma.link defines the sigma.link, with "log" link as the default for the sigma.
 #'
 #' @references
-#' \insertRef{nekoukhou2013}{DiscreteDists}
-#'
-#' @importFrom Rdpack reprompt
+#' Nekoukhou, V., Alamatsaz, M. H., & Bidram, H. (2013). Discrete generalized exponential distribution of a second type. Statistics, 47(4), 876-887.
 #'
 #' @seealso \link{dDGEII}.
 #'

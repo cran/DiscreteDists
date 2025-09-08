@@ -95,8 +95,7 @@ probs2 <- prop.table(table(x))
 
 cn <- union(names(probs1), names(probs2))
 height <- rbind(probs1[cn], probs2[cn])
-nombres <- cn
-mp <- barplot(height, beside = TRUE, names.arg = nombres,
+mp <- barplot(height, beside = TRUE, names.arg = cn,
               col=c("dodgerblue3","firebrick3"), las=1,
               xlab="X", ylab="Proportion")
 legend("topright",
@@ -114,7 +113,11 @@ plot(p, qxx, type="s", lwd=2, col="green3", ylab="quantiles",
      main="Quantiles for Poisson XLindley mu=0.3")
 }
 \references{
-\insertRef{ahsan2022}{DiscreteDists}
+Ahsan-ul-Haq, M., Al-Bossly, A., El-Morshedy, M., & Eliwa,
+M. S. (2022). Poisson XLindley distribution for count data:
+statistical and reliability properties with estimation
+techniques and inference. Computational Intelligence and
+neuroscience, 2022(1), 6503670.
 }
 \seealso{
 \link{POISXL}.

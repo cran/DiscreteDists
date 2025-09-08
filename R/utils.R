@@ -124,25 +124,28 @@ estim_mu_sigma_HYPERPO2 <- function(y) {
   names(res) <- c("mu_hat", "sigma_hat")
   return(res)
 }
-#' Auxiliar function to obtain lambda from E(X)
-#' @description This function implements the procedure given in page 150.
+#' Auxiliar function to obtain lambda from E(X) in HYPERPO2
+#' @description This function implements the procedure given in page 152.
 #' @param media the value for the mean or E(X).
 #' @param gamma the value for the gamma parameter.
 #' @return returns the value of lambda to ensure the mean and gamma.
 #' @keywords internal
 #' @export
 obtaining_lambda <- function(media, gamma) {
-  # Begin aux function
-  fun <- function(x) x-(gamma-1)*(1-1/f11_cpp(gamma, x))-media
-  fun <- Vectorize(fun)
+  # Begin aux function, based on expression 6 of Saez-Castillo (2013)
+  fun_exp_6 <- function(x, media, gamma) x-(gamma-1)*(1-1/f11_cpp(gamma, x))-media
+  fun_exp_6 <- Vectorize(fun_exp_6)
   # End aux function
   if (gamma == 1)
     result <- media
   else {
-    res <- uniroot(f=fun,
-                   lower=min(media, max(media+gamma-1, gamma*media)),
-                   upper=max(media, min(media+gamma-1, gamma*media)))
-    result <- res$root
+    mini <- min(media, max(media+gamma-1, gamma*media))
+    maxi <- max(media, min(media+gamma-1, gamma*media))
+    res <- try(uniroot(f=fun_exp_6_vec_cpp,
+                       #f=fun_exp_6,
+                       lower=mini, upper=maxi,
+                       media=media, gamma=gamma))
+    result <- ifelse(class(res)=="try-error", media, res$root)
   }
   result
 }
@@ -196,37 +199,7 @@ estim_mu_DLD <- function(y){
   res <- res1$par
   return(res)
 }
-#' logLik function for DMOLBE
-#' @description Calculates logLik for DMOLBE distribution.
-#' @param logparam vector with parameters in log scale.
-#' @param x vector with the response variable.
-#' @return returns the loglikelihood given the parameters and random sample.
-#' @keywords internal
-#' @export
-logLik_DMOLBE <- function(logparam=c(0, 0), x){
-  return(sum(dDMOLBE(x     = x,
-                     mu    = exp(logparam[1]),
-                     sigma = exp(logparam[2]),
-                     log=TRUE)))
-}
-#' Initial values for DMOLBE
-#' @description This function generates initial values for the parameters.
-#' @param y vector with the response variable.
-#' @return returns a vector with the MLE estimations.
-#' @keywords internal
-#' @export
-#' @importFrom stats optim
-estim_mu_sigma_DMOLBE <- function(y) {
-  mod <- optim(par=c(0, 0),
-               fn=logLik_DMOLBE,
-               method="Nelder-Mead",
-               control=list(fnscale=-1, maxit=100000),
-               x=y)
-  res <- c(mu_hat    = exp(mod$par[1]),
-           sigma_hat = exp(mod$par[2]))
-  names(res) <- c("mu_hat", "sigma_hat")
-  return(res)
-}
+
 #' logLik function for discrete Inverted Kumaraswamy
 #' @description Calculates logLik for discrete Inverted Kumaraswamy distribution.
 #' @param param vector with parameters in log scale.

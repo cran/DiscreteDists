@@ -102,8 +102,7 @@ probs2 <- prop.table(table(x))
 
 cn <- union(names(probs1), names(probs2))
 height <- rbind(probs1[cn], probs2[cn])
-nombres <- cn
-mp <- barplot(height, beside = TRUE, names.arg = nombres,
+mp <- barplot(height, beside = TRUE, names.arg = cn,
               col=c("dodgerblue3","firebrick3"), las=1,
               xlab="X", ylab="Proportion")
 legend("topright",
@@ -122,7 +121,7 @@ plot(p, qxx, type="s", lwd=2, col="green3", ylab="quantiles",
 
 }
 \references{
-\insertRef{el2020discrete}{DiscreteDists}
+El-Morshedy, M., Eliwa, M. S., & Altun, E. (2020). Discrete Burr-Hatke distribution with properties, estimation methods and regression model. IEEE access, 8, 74359-74370.
 }
 \seealso{
 \link{DBH}.

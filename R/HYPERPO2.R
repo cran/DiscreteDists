@@ -3,17 +3,19 @@
 #' @author Freddy Hernandez, \email{fhernanb@unal.edu.co}
 #'
 #' @description
-#' The function \code{HYPERPO2()} defines the hyper Poisson distribution, a two parameter
-#' distribution, for a \code{gamlss.family} object to be used in GAMLSS fitting
-#' using the function \code{gamlss()}.
+#' The function \code{HYPERPO2()} defines the
+#' hyper Poisson distribution (with mu as mean)
+#' a two parameter distribution,
+#' for a \code{gamlss.family} object to be used in GAMLSS
+#' fitting using the function \code{gamlss()}.
 #'
 #' @param mu.link defines the mu.link, with "log" link as the default for the mu parameter.
 #' @param sigma.link defines the sigma.link, with "log" link as the default for the sigma.
 #'
 #' @references
-#' \insertRef{saez2013hyperpo}{DiscreteDists}
-#'
-#' @importFrom Rdpack reprompt
+#' Sáez-Castillo, A. J., & Conde-Sánchez, A. (2013). A hyper-Poisson regression
+#' model for overdispersed and underdispersed count data.
+#' Computational Statistics & Data Analysis, 61, 148-157.
 #'
 #' @seealso \link{dHYPERPO2}, \link{HYPERPO}.
 #'
@@ -61,7 +63,7 @@ HYPERPO2 <- function (mu.link="log", sigma.link="log") {
                  mu.dr    = mstats$mu.eta,
                  sigma.dr = dstats$mu.eta,
 
-                 # Primeras derivadas, por ahora son computacionales
+                 # First derivatives
 
                  dldm = function(y, mu, sigma) {
                    dm   <- gamlss::numeric.deriv(dHYPERPO2(y, mu, sigma, log=TRUE),
@@ -79,7 +81,7 @@ HYPERPO2 <- function (mu.link="log", sigma.link="log") {
                    dldd
                  },
 
-                 # Segundas derivadas, por ahora son computacionales
+                 # Second derivatives
 
                  d2ldm2 = function(y, mu, sigma) {
                    dm   <- gamlss::numeric.deriv(dHYPERPO2(y, mu, sigma, log=TRUE),
@@ -100,6 +102,7 @@ HYPERPO2 <- function (mu.link="log", sigma.link="log") {
                                                  theta="sigma",
                                                  delta=0.00001)
                    dldd <- as.vector(attr(dd, "gradient"))
+
                    d2ldmdd <- - dldm * dldd
                    d2ldmdd <- ifelse(d2ldmdd < -1e-15, d2ldmdd, -1e-15)
                    d2ldmdd
@@ -119,8 +122,8 @@ HYPERPO2 <- function (mu.link="log", sigma.link="log") {
                  rqres      = expression(rqres(pfun="pHYPERPO2", type="Discrete",
                                                ymin = 0, y = y, mu = mu, sigma = sigma)),
 
-                 mu.initial    = expression(mu    <- rep(estim_mu_sigma_HYPERPO2(y)[1], length(y)) ),
-                 sigma.initial = expression(sigma <- rep(estim_mu_sigma_HYPERPO2(y)[2], length(y)) ),
+                 mu.initial    = expression(mu    <- rep(mean(y), length(y))),
+                 sigma.initial = expression(sigma <- rep(1, length(y))),
 
                  mu.valid    = function(mu)    all(mu > 0),
                  sigma.valid = function(sigma) all(sigma > 0),

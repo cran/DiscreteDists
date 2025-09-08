@@ -15,13 +15,15 @@ to fit a Discrete Burr-Hatke distribution
 in the \code{gamlss()} function.
 }
 \description{
-The function \code{DBH()} defines the Discrete Burr Hatke distribution, one-parameter
-discrete distribution, for a \code{gamlss.family} object to be used in GAMLSS fitting
-using the function \code{gamlss()}.
+The function \code{DBH()} defines the
+Discrete Burr Hatke distribution
+a single parameter distribution,
+for a \code{gamlss.family} object to be used in GAMLSS
+fitting using the function \code{gamlss()}.
 }
 \details{
-The Discrete Burr-Hatke distribution with parameters \eqn{\mu} has a support
-0, 1, 2, ... and density given by
+The Discrete Burr-Hatke distribution with parameter \eqn{\mu} has a support
+0, 1, 2, ... and its probability mass function (pmf) is given by
 
 \eqn{f(x | \mu) = (\frac{1}{x+1}-\frac{\mu}{x+2})\mu^{x}}
 
@@ -66,7 +68,7 @@ mod2 <- gamlss(y~x1, family=DBH, data=datos,
 summary(mod2)
 
 # Example 3
-# number of carious teeth among the four deciduous molars.
+# Number of carious teeth among the four deciduous molars.
 # Taken from EL-MORSHEDY (2020) page 74364.
 
 y <- rep(0:4, times=c(64, 17, 10, 6, 3))
@@ -78,9 +80,24 @@ mod3 <- gamlss(y~1, family=DBH,
 # using the inverse link function
 inv_logit <- function(x) 1/(1 + exp(-x))
 inv_logit(coef(mod3, what="mu"))
+
+# Example 4
+# Counts of cysts of kidneys using steroids.
+# Taken from EL-MORSHEDY (2020) page 74365.
+
+y <- rep(0:11, times=c(65, 14, 10, 6, 4, 2, 2, 2, 1, 1, 1, 2))
+
+mod4 <- gamlss(y~1, family=DBH,
+               control=gamlss.control(n.cyc=500, trace=FALSE))
+
+# Extracting the fitted values for mu
+# using the inverse link function
+inv_logit <- function(x) 1/(1 + exp(-x))
+inv_logit(coef(mod4, what="mu"))
+
 }
 \references{
-\insertRef{el2020discrete}{DiscreteDists}
+El-Morshedy, M., Eliwa, M. S., & Altun, E. (2020). Discrete Burr-Hatke distribution with properties, estimation methods and regression model. IEEE access, 8, 74359-74370.
 }
 \seealso{
 \link{dDBH}.

@@ -3,16 +3,16 @@
 #' @author Yojan Andrés Alcaraz Pérez, \email{yalcaraz@unal.edu.co}
 #'
 #' @description
-#' The function \code{DLD()} defines the Discrete Lindley distribution, one-parameter
-#' discrete distribution, for a \code{gamlss.family} object to be used in GAMLSS fitting
-#' using the function \code{gamlss()}.
+#' The function \code{DLD()} defines the
+#' Discrete Lindley distribution
+#' a single parameter distribution,
+#' for a \code{gamlss.family} object to be used in GAMLSS
+#' fitting using the function \code{gamlss()}.
 #'
 #' @param mu.link defines the mu.link, with "log" link as the default for the mu parameter.
 #'
 #' @references
-#' \insertRef{bakouch2014new}{DiscreteDists}
-#'
-#' @importFrom Rdpack reprompt
+#' Bakouch, H. S., Jazi, M. A., & Nadarajah, S. (2014). A new discrete distribution. Statistics, 48(1), 200-240.
 #'
 #' @seealso \link{dDLD}.
 #'
@@ -49,7 +49,7 @@ DLD <- function (mu.link="log") {
   mstats <- checklink("mu.link", "DLD",
                       substitute(mu.link), c("log", "identity"))
 
-  structure(list(family=c("DLD", "Lindley"),
+  structure(list(family=c("DLD", "Discrete Lindley"),
                  parameters=list(mu=TRUE),
                  nopar=1,
                  type="Discrete",

@@ -120,14 +120,13 @@ probs2 <- prop.table(table(x))
 
 cn <- union(names(probs1), names(probs2))
 height <- rbind(probs1[cn], probs2[cn])
-nombres <- cn
-mp <- barplot(height, beside=TRUE, names.arg=nombres,
-              col=c('dodgerblue3','firebrick3'), las=1,
-              xlab='X', ylab='Proportion')
-legend('topright',
-       legend=c('Theoretical', 'Simulated'),
-       bty='n', lwd=3,
-       col=c('dodgerblue3','firebrick3'), lty=1)
+mp <- barplot(height, beside=TRUE, names.arg=cn,
+              col=c("dodgerblue3","firebrick3"), las=1,
+              xlab="X", ylab="Proportion")
+legend("topright",
+       legend=c("Theoretical", "Simulated"),
+       bty="n", lwd=3,
+       col=c("dodgerblue3","firebrick3"), lty=1)
 
 # Example 4
 # Checking the quantile function
@@ -141,7 +140,7 @@ plot(p, qxx, type="s", lwd=2, col="green3", ylab="quantiles",
 
 }
 \references{
-\insertRef{nekoukhou2013}{DiscreteDists}
+Nekoukhou, V., Alamatsaz, M. H., & Bidram, H. (2013). Discrete generalized exponential distribution of a second type. Statistics, 47(4), 876-887.
 }
 \seealso{
 \link{DGEII}.

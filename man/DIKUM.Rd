@@ -17,9 +17,11 @@ to fit a discrete Inverted Kumaraswamy distribution
 in the \code{gamlss()} function.
 }
 \description{
-The function \code{DIKUM()} defines the discrete Inverted Kumaraswamy distribution, a two parameter
-distribution, for a \code{gamlss.family} object to be used in GAMLSS fitting
-using the function \code{gamlss()}.
+The function \code{DIKUM()} defines the
+discrete Inverted Kumaraswamy distribution
+a two parameter distribution,
+for a \code{gamlss.family} object to be used in GAMLSS
+fitting using the function \code{gamlss()}.
 }
 \details{
 The discrete Inverted Kumaraswamy distribution with parameters \eqn{\mu} and \eqn{\sigma}
@@ -46,8 +48,8 @@ mod1 <- gamlss(y ~ 1, sigma.fo = ~1, family=DIKUM,
 
 # Extracting the fitted values for mu and sigma
 # using the inverse link function
-exp(coef(mod1, what='mu'))
-exp(coef(mod1, what='sigma'))
+exp(coef(mod1, what="mu"))
+exp(coef(mod1, what="sigma"))
 
 # Example 2
 # Generating random values under some model
@@ -64,7 +66,7 @@ gendat <- function(n) {
   data.frame(y=y, x1=x1, x2=x2)
 }
 
-dat <- gendat(n=150)
+dat <- gendat(n=1000)
 
 # Fitting the model
 mod2 <- gamlss(y ~ x1, sigma.fo = ~x2, family = "DIKUM", data=dat,
@@ -73,7 +75,7 @@ mod2 <- gamlss(y ~ x1, sigma.fo = ~x2, family = "DIKUM", data=dat,
 summary(mod2)
 }
 \references{
-\insertRef{EL_Helbawy2022}{DiscreteDists}
+El-Helbawy, A. A., Hegazy, M. A., Al-Dayian, G. R., & Abd EL-Kader, R. E. (2022). A discrete analog of the inverted Kumaraswamy distribution: properties and estimation with application to COVID-19 data. Pakistan Journal of Statistics and Operation Research, 18(1), 297-328.
 }
 \seealso{
 \link{dDIKUM}.

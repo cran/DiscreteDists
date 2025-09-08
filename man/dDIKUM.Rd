@@ -107,12 +107,12 @@ cn <- union(names(probs1), names(probs2))
 height <- rbind(probs1[cn], probs2[cn])
 nombres <- cn
 mp <- barplot(height, beside = TRUE, names.arg = nombres,
-              col=c('dodgerblue3','firebrick3'), las=1,
-              xlab='X', ylab='Proportion')
-legend('topright',
-       legend=c('Theoretical', 'Simulated'),
-       bty='n', lwd=3,
-       col=c('dodgerblue3','firebrick3'), lty=1)
+              col=c("dodgerblue3","firebrick3"), las=1,
+              xlab="X", ylab="Proportion")
+legend("topright",
+       legend=c("Theoretical", "Simulated"),
+       bty="n", lwd=3,
+       col=c("dodgerblue3","firebrick3"), lty=1)
 
 # Example 4
 # Checking the quantile function
@@ -126,7 +126,11 @@ plot(p, qxx, type="s", lwd=2, col="green3", ylab="quantiles",
 
 }
 \references{
-\insertRef{EL_Helbawy2022}{DiscreteDists}
+El-Helbawy, A. A., Hegazy, M. A., Al-Dayian, G. R., & Abd EL-Kader,
+R. E. (2022). A discrete analog of the inverted Kumaraswamy
+distribution: properties and estimation with application to
+COVID-19 data. Pakistan Journal of Statistics and Operation
+Research, 18(1), 297-328.
 }
 \seealso{
 \link{DIKUM}.

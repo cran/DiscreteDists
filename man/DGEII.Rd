@@ -17,10 +17,11 @@ to fit a DGEII distribution
 in the \code{gamlss()} function.
 }
 \description{
-The function \code{DGEII()} defines the Discrete generalized exponential distribution,
-Second type, a two parameter
-distribution, for a \code{gamlss.family} object to be used in GAMLSS fitting
-using the function \code{gamlss()}.
+The function \code{DGEII()} defines the
+Discrete generalized exponential distribution of a Second type
+a two parameter distribution,
+for a \code{gamlss.family} object to be used in GAMLSS
+fitting using the function \code{gamlss()}.
 }
 \details{
 The DGEII distribution with parameters \eqn{\mu} and \eqn{\sigma}
@@ -39,13 +40,13 @@ we did it to implement this distribution within gamlss framework.
 # Example 1
 # Generating some random values with
 # known mu and sigma
-set.seed(189)
+
 y <- rDGEII(n=100, mu=0.75, sigma=0.5)
 
 # Fitting the model
 library(gamlss)
 mod1 <- gamlss(y~1, family=DGEII,
-               control=gamlss.control(n.cyc=500, trace=FALSE))
+               control=gamlss.control(n.cyc=500, trace=TRUE))
 
 # Extracting the fitted values for mu and sigma
 # using the inverse link function
@@ -57,7 +58,7 @@ exp(coef(mod1, what="sigma"))
 # Example 2
 # Generating random values under some model
 
-# A function to simulate a data set with Y ~ GGEO
+# A function to simulate a data set with Y ~ DGEII
 gendat <- function(n) {
   x1 <- runif(n)
   x2 <- runif(n)
@@ -67,11 +68,10 @@ gendat <- function(n) {
   data.frame(y=y, x1=x1, x2=x2)
 }
 
-set.seed(1234)
 datos <- gendat(n=100)
 
 mod2 <- gamlss(y~x1, sigma.fo=~x2, family=DGEII, data=datos,
-               control=gamlss.control(n.cyc=500, trace=FALSE))
+               control=gamlss.control(n.cyc=500, trace=TRUE))
 
 summary(mod2)
 
@@ -83,7 +83,7 @@ summary(mod2)
 y <- rep(x=0:5, times=c(447, 132, 42, 21, 3, 2))
 
 mod3 <- gamlss(y~1, family=DGEII,
-               control=gamlss.control(n.cyc=500, trace=FALSE))
+               control=gamlss.control(n.cyc=500, trace=TRUE))
 
 # Extracting the fitted values for mu and sigma
 # using the inverse link function
@@ -93,7 +93,7 @@ exp(coef(mod3, what="sigma"))
 
 }
 \references{
-\insertRef{nekoukhou2013}{DiscreteDists}
+Nekoukhou, V., Alamatsaz, M. H., & Bidram, H. (2013). Discrete generalized exponential distribution of a second type. Statistics, 47(4), 876-887.
 }
 \seealso{
 \link{dDGEII}.

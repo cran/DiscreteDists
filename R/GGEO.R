@@ -3,18 +3,17 @@
 #' @author Valentina Hurtado Sepúlveda, \email{vhurtados@unal.edu.co}
 #'
 #' @description
-#' The function \code{GGEO()} defines the Generalized Geometric distribution,
+#' The function \code{GGEO()} defines the
+#' Generalized Geometric distribution
 #' a two parameter distribution,
-#' for a \code{gamlss.family} object to be used in GAMLSS fitting
-#' using the function \code{gamlss()}.
+#' for a \code{gamlss.family} object to be used in GAMLSS
+#' fitting using the function \code{gamlss()}.
 #'
 #' @param mu.link defines the mu.link, with "log" link as the default for the mu parameter.
 #' @param sigma.link defines the sigma.link, with "logit" link as the default for the sigma. Other links are "probit" and "cloglog"'(complementary log-log)
 #'
 #' @references
-#' \insertRef{gomez2010}{DiscreteDists}
-#'
-#' @importFrom Rdpack reprompt
+#' Gómez-Déniz, E. (2010). Another generalization of the geometric distribution. Test, 19, 399-415.
 #'
 #' @seealso \link{dGGEO}.
 #'

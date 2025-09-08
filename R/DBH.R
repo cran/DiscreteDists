@@ -3,22 +3,22 @@
 #' @author Valentina Hurtado Sepulveda, \email{vhurtados@unal.edu.co}
 #'
 #' @description
-#' The function \code{DBH()} defines the Discrete Burr Hatke distribution, one-parameter
-#' discrete distribution, for a \code{gamlss.family} object to be used in GAMLSS fitting
-#' using the function \code{gamlss()}.
+#' The function \code{DBH()} defines the
+#' Discrete Burr Hatke distribution
+#' a single parameter distribution,
+#' for a \code{gamlss.family} object to be used in GAMLSS
+#' fitting using the function \code{gamlss()}.
 #'
 #' @param mu.link defines the mu.link, with "logit" link as the default for the mu parameter. Other links are "probit" and "cloglog"'(complementary log-log)
 #'
 #' @references
-#' \insertRef{el2020discrete}{DiscreteDists}
-#'
-#' @importFrom Rdpack reprompt
+#' El-Morshedy, M., Eliwa, M. S., & Altun, E. (2020). Discrete Burr-Hatke distribution with properties, estimation methods and regression model. IEEE access, 8, 74359-74370.
 #'
 #' @seealso \link{dDBH}.
 #'
 #' @details
-#' The Discrete Burr-Hatke distribution with parameters \eqn{\mu} has a support
-#' 0, 1, 2, ... and density given by
+#' The Discrete Burr-Hatke distribution with parameter \eqn{\mu} has a support
+#' 0, 1, 2, ... and its probability mass function (pmf) is given by
 #'
 #' \eqn{f(x | \mu) = (\frac{1}{x+1}-\frac{\mu}{x+2})\mu^{x}}
 #'
