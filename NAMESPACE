@@ -15,8 +15,12 @@ export(F11)
 export(GGEO)
 export(HYPERPO)
 export(HYPERPO2)
+export(NPGL)
+export(NPGL2)
 export(POISXL)
+export(PTRTE)
 export(add)
+export(checklink)
 export(dBerG)
 export(dCOMPO)
 export(dCOMPO2)
@@ -30,7 +34,10 @@ export(dDsPA)
 export(dGGEO)
 export(dHYPERPO)
 export(dHYPERPO2)
+export(dNPGL)
+export(dNPGL2)
 export(dPOISXL)
+export(dPTRTE)
 export(estim_mu_DBH)
 export(estim_mu_DLD)
 export(estim_mu_POISXL)
@@ -43,6 +50,10 @@ export(estim_mu_sigma_DsPA)
 export(estim_mu_sigma_GGEO)
 export(estim_mu_sigma_HYPERPO)
 export(estim_mu_sigma_HYPERPO2)
+export(estim_mu_sigma_NPGL)
+export(estim_mu_sigma_NPGL2)
+export(estim_mu_sigma_NPGL_MM)
+export(estim_mu_sigma_PTRTE)
 export(logLik_DBH)
 export(logLik_DGEII)
 export(logLik_DIKUM)
@@ -53,7 +64,10 @@ export(logLik_DsPA)
 export(logLik_GGEO)
 export(logLik_HYPERPO)
 export(logLik_HYPERPO2)
+export(logLik_NPGL)
+export(logLik_NPGL2)
 export(logLik_POISXL)
+export(make.link.gamlss)
 export(mean_var_hp)
 export(mean_var_hp2)
 export(obtaining_lambda)
@@ -70,7 +84,10 @@ export(pDsPA)
 export(pGGEO)
 export(pHYPERPO)
 export(pHYPERPO2)
+export(pNPGL)
+export(pNPGL2)
 export(pPOISXL)
+export(pPTRTE)
 export(plot_discrete_cdf)
 export(qBerG)
 export(qCOMPO)
@@ -85,7 +102,10 @@ export(qDsPA)
 export(qGGEO)
 export(qHYPERPO)
 export(qHYPERPO2)
+export(qNPGL)
+export(qNPGL2)
 export(qPOISXL)
+export(qPTRTE)
 export(rBerG)
 export(rCOMPO)
 export(rCOMPO2)
@@ -99,25 +119,44 @@ export(rDsPA)
 export(rGGEO)
 export(rHYPERPO)
 export(rHYPERPO2)
+export(rNPGL)
+export(rNPGL2)
 export(rPOISXL)
+export(rPTRTE)
 export(simulate_hp)
 export(stopping)
-importFrom(COMPoissonReg,dcmp)
-importFrom(COMPoissonReg,pcmp)
-importFrom(COMPoissonReg,qcmp)
-importFrom(COMPoissonReg,rcmp)
+importFrom(COMPoissonReg,
+  dcmp,
+  pcmp,
+  qcmp,
+  rcmp
+)
 importFrom(Rcpp,sourceCpp)
 importFrom(gamlss,rqres.plot)
-importFrom(gamlss.dist,checklink)
 importFrom(graphics,grid)
 importFrom(nleqslv,nleqslv)
 importFrom(pracma,lambertWn)
-importFrom(stats,coef)
-importFrom(stats,lm)
-importFrom(stats,optim)
-importFrom(stats,optimize)
-importFrom(stats,runif)
-importFrom(stats,stepfun)
-importFrom(stats,var)
+importFrom(stats,
+  coef,
+  dcauchy,
+  dlogis,
+  dnorm,
+  lm,
+  optim,
+  optimize,
+  pcauchy,
+  plogis,
+  pnorm,
+  power,
+  qcauchy,
+  qlogis,
+  qnorm,
+  rexp,
+  rgamma,
+  rpois,
+  runif,
+  stepfun,
+  var
+)
 importFrom(utils,tail)
 useDynLib(DiscreteDists)
